@@ -13,7 +13,7 @@ def agregar_usuario():
     
     # Verificar la contraseña de administrador antes de agregar un usuario
     if es_admin(admin_password):
-        if username in usuarios:
+        if username in usuarios:    
             messagebox.showerror("Error", "El usuario ya existe.")
         else:
             usuarios[username] = {'password': password, 'role': 'usuario', 'department': department}

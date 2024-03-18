@@ -24,7 +24,7 @@ root.title("Inicio de sesión")
 root.geometry("350x200")  # Ajuste de la geometría de la ventana
 
 # Crear los widgets
-label_username = Label(root, text="Usuario:")
+label_username = Label(root, text="Departamento:")
 label_username.grid(row=0, column=0, padx=5, pady=5)
 
 entry_username = Entry(root)

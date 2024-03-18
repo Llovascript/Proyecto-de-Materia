@@ -1,4 +1,4 @@
-from tkinter import Tk, Frame, Label, Entry, Button, Listbox, messagebox
+from tkinter import Tk, Frame, Label, Entry, Button, Listbox, messagebox, simpledialog
 from tkinter import ttk
 
 class OfficeSupplyRequestApp:
@@ -13,14 +13,26 @@ class OfficeSupplyRequestApp:
         self.view_requests_tab = ViewRequestsTab(self.tabControl)
         
         self.tabControl.add(self.create_request_tab, text="Crear Solicitud")
-        self.tabControl.add(self.view_requests_tab, text="Ver Solicitudes")
         self.tabControl.pack(expand=1, fill="both")
         
+        self.admin_logged_in = False
+        self.admin_button = Button(self.ventana, text="Iniciar sesión como administrador", command=self.admin_login)
+        self.admin_button.pack()
+        
         self.ventana.mainloop()
+        
+    def admin_login(self):
+        password = simpledialog.askstring("Login", "Ingrese la contraseña de administrador:")
+        if password == "admin123":
+            self.admin_logged_in = True
+            self.tabControl.add(self.view_requests_tab, text="Ver Solicitudes")
+            self.admin_button.pack_forget()
+        else:
+            messagebox.showerror("Error", "Contraseña incorrecta. Acceso denegado.")
 
 class CreateRequestTab(Frame):
     def __init__(self, parent):
-        self.parent = parent
+        self.parent = parent    
         Frame.__init__(self, parent)
         self.department_label = Label(self, text="Departamento:")
         self.department_entry = Entry(self)
@@ -57,5 +69,4 @@ class ViewRequestsTab(Frame):
     def refresh_requests(self):
         messagebox.showinfo("Información", "Lista de solicitudes actualizada.")
 
-if __name__ == "__main__":
-    app = OfficeSupplyRequestApp()
+OfficeSupplyRequestApp().ventana.mainloop()

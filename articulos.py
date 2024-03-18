@@ -1,5 +1,5 @@
 from tkinter import *
-import articulos
+
 
 class MerksAndSpenApp:
     def __init__(self, root):
